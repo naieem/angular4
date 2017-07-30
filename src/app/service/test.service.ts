@@ -15,20 +15,29 @@
 
 
 import { Injectable } from '@angular/core';
-import { Http,Response } from '@angular/http';
+import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import { Posts } from './Posts';
 
 @Injectable()
 export class TestService {
-
+    // private headers = new Headers({'Content-Type': 'application/json'});
     private heroesUrl = 'https://jsonplaceholder.typicode.com/todos';  // URL to web api
 
     constructor(private http: Http) { }
 
-    getHeroes(){
+    // getHeroes(){
+    //     return this.http.get(this.heroesUrl)
+    //     .map((response:Response) => response.json());
+    // }
+
+    getHeroes(): Promise<Posts[]> {
         return this.http.get(this.heroesUrl)
-        .map((response:Response) => response.json());
+            .toPromise()
+            .then(response =>response.json())
+            .catch(this.handleError);
     }
 
 

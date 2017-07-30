@@ -1,8 +1,14 @@
 <h1>
     {{title}}
 </h1>
+<div *ngIf="hero">
+    <h2>
+        {{hero.title | uppercase}} is my hero
+    </h2>
+</div>
 <ul class="heroes">
     <li *ngFor="let hero of employees">
-        <span class="badge">{{hero.id}}</span> {{hero.title}}
+        <span class="badge">{{hero.id}}</span> {{hero.title}}<br>
+        <button (click)="sayHi(hero)">View Details</button>
     </li>
 </ul>
